@@ -1,0 +1,11 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {progressIndex,selectProgressOrder} from '../src/lib/order-progress.ts';
+import type {Order} from '../src/lib/orders.ts';
+const make=(id:string,userId:string,status:Order['status'],createdAt:number)=>({id,userId,status,createdAt} as Order);
+const orders=[make('older','me','preparing',10),make('newer','me','awaiting_payment',20),make('foreign','other','ready',30),make('finished','me','received',5)];
+const choose=(patch:Partial<Parameters<typeof selectProgressOrder>[0]>={})=>selectProgressOrder({orders,userId:'me',requestedId:null,trackedId:null,preferDraft:false,...patch});
+test('draft steps do not claim a persisted or paid order',()=>{assert.equal(progressIndex(undefined),0);assert.equal(progressIndex(undefined,true),1);assert.equal(choose({preferDraft:true}),undefined);});
+test('progress follows the requested owned order and never substitutes a foreign or missing one',()=>{assert.equal(choose({requestedId:'older'})?.id,'older');assert.equal(choose({requestedId:'foreign'}),undefined);assert.equal(choose({requestedId:'missing'}),undefined);assert.equal(choose({requestedId:''}),undefined);assert.equal(choose({userId:null}),undefined);});
+test('tracking remains on the selected order across routes and new carts start a separate draft',()=>{assert.equal(choose()?.id,'newer');assert.equal(choose({trackedId:'older'})?.id,'older');assert.equal(choose({trackedId:'finished'})?.id,'finished');assert.equal(choose({trackedId:'older',preferDraft:true}),undefined);assert.equal(choose({requestedId:'older',preferDraft:true})?.id,'older');});
+test('payment issues and cancellation never appear as completed food pickup',()=>{assert.equal(progressIndex('payment_issue'),2);assert.equal(progressIndex('cancelled'),-1);assert.equal(progressIndex('received'),6);});
+test('stage is derived from the latest server order status without mutating order data',()=>{const latest=orders.map(o=>o.id==='older'?{...o,status:'ready' as const}:o);const selected=choose({orders:latest,trackedId:'older'});assert.equal(selected?.status,'ready');assert.equal(progressIndex(selected?.status),5);assert.equal(orders[0].status,'preparing');});

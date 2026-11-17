@@ -1,0 +1,1 @@
+import {Suspense} from 'react';import {AcceptAdminInvite} from '@/components/admin-pages';export default function Page(){return <Suspense fallback={<p>กำลังโหลด…</p>}><AcceptAdminInvite/></Suspense>}

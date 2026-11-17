@@ -1,0 +1,18 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Imjai Local PostgreSQL",
+      "Group": "Local development",
+      "Host": "127.0.0.1",
+      "Port": 5432,
+      "MaintenanceDB": "imjai_campus",
+      "Username": "imjai_app",
+      "SSLMode": "prefer",
+      "ConnectionParameters": {
+        "sslmode": "prefer",
+        "connect_timeout": 10,
+        "passfile": "C:/Users/USER/Documents/Codex/imjai-database-secrets/pgpass.conf"
+      }
+    }
+  }
+}

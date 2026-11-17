@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Noto Sans Thai", system-ui, sans-serif;
+  --color-brand: #ee672b;
+  --color-brand-dark: #c94b16;
+  --color-ink: #2c302a;
+  --color-muted: #7b8076;
+  --color-paper: #faf9f6;
+  --color-line: #eeeee7;
+  --color-peach: #fff0e7;
+  --color-sage: #49745a;
+  --color-sage-light: #edf3e9;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+button,
+a,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+button:not(:disabled),
+a {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+button,
+a,
+input {
+  outline-offset: 4px;
+}
+:focus-visible {
+  outline: 3px solid #f5a372;
+}
+::selection {
+  background: #ffddc7;
+}
+dialog::backdrop {
+  background: #242b2370;
+  backdrop-filter: blur(5px);
+}
+dialog[open] {
+  animation: enter 0.18s ease-out;
+}
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

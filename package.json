@@ -1,0 +1,40 @@
+{
+  "name": "imjai-campus",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --webpack --hostname 127.0.0.1",
+    "build": "next build --webpack",
+    "build:recover": "node --experimental-strip-types scripts/recover-build.mjs",
+    "start": "next start --hostname 127.0.0.1",
+    "preview": "next start --hostname 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/cart.test.ts tests/orders.test.ts tests/merchant.test.ts tests/collaboration.test.ts tests/governance.test.ts tests/integration.test.ts tests/persistence.test.ts tests/access.test.ts tests/checkout.test.ts tests/order-progress.test.ts",
+    "check:export": "node scripts/check-export.mjs",
+    "db:migrate": "node --experimental-strip-types scripts/db-migrate.mjs",
+    "db:check": "node scripts/db-check.mjs",
+    "db:start": "node scripts/db-control.mjs start",
+    "db:stop": "node scripts/db-control.mjs stop",
+    "db:status": "node scripts/db-control.mjs status",
+    "db:test": "node scripts/test-database.mjs",
+    "account:create": "node scripts/create-staff-account.mjs",
+    "db:checkout:test": "node --experimental-strip-types scripts/test-checkout.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "latest",
+    "next": "16.4.5",
+    "pg": "^8.23.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/node": "latest",
+    "@types/pg": "^8.23.1",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "tailwindcss": "4.3.5",
+    "typescript": "latest"
+  }
+}
