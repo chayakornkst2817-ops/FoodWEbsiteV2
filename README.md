@@ -1,4 +1,4 @@
-# อิ่มใจ — Next.js + PostgreSQL ในเครื่อง
+# FoodWEbsiteV2 — อิ่มใจ
 
 เว็บสั่งอาหารล่วงหน้าในวิทยาลัย ภาษาไทย ใช้ Next.js 16, React, TypeScript และ Tailwind CSS พร้อมฐานข้อมูล PostgreSQL สำหรับพัฒนาและทดสอบในเครื่องนี้
 
